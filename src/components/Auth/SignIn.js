@@ -13,14 +13,12 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
 
-import { ReactComponent as SignUpImage } from "../../assets/svg/signUp.svg";
-import { ReactComponent as GoogleIcon } from "../../assets/svg/google.svg";
+import { ReactComponent as SignInImage } from "../../assets/svg/signIn.svg";
 import { FaFacebookF } from "react-icons/fa";
 import * as AIcons from "react-icons/ai";
 import "./sign.css";
-export default function SignUp() {
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
+
+export default function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isPassword, setIsPassword] = useState(true);
@@ -29,13 +27,14 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
       try {
         setIsLoadingForm(true);
-        signUp(emailRef.current.value, passwordRef.current.value);
+        signIn(emailRef.current.value, passwordRef.current.value);
       } catch (error) {}
     }
 
@@ -44,7 +43,7 @@ export default function SignUp() {
     setIsLoadingForm(false);
   };
 
-  const { signUp, socialMediaSign, error } = useAuth();
+  const { signIn, error } = useAuth();
 
   return (
     <>
@@ -64,83 +63,33 @@ export default function SignUp() {
                   className="text-center sign-form-text"
                   style={{ fontSize: 40 }}
                 >
-                  Let's grow your business!
+                  Hello, Welcome Back !
                 </h2>
                 <h2 className="text-center sign-above-image-text">
-                  Viverra gravida parturient pharetra amet, lorem lacinia.
+                  Quis sagittis, velit est vitae.
                 </h2>
               </div>
-              <SignUpImage style={{ width: 516, height: 516 }} />
+              <SignInImage style={{ width: 516, height: 516 }} />
             </Row>
           </Col>
           <Col className="d-flex justify-content-center align-items-center card-sign">
-            <Card className="d-flex justify-content-center align-items-center card-sign">
+            <Card className="d-flex align-items-center card-sign">
               <Card.Body className="d-flex align-items-center">
                 <div>
-                  <h2 className="text-center mb-4 sign-form-text">
-                    Create account
-                  </h2>
-                  <Button
-                    className="w-100 google-sign-button mb-3"
-                    onClick={() => socialMediaSign("google")}
-                  >
-                    <GoogleIcon style={{ height: 16 }} className="mr-3" />
-                    <small className="sign-social-text">
-                      {" "}
-                      sign up with google{" "}
-                    </small>
-                  </Button>
-                  <Button
-                    className="w-100 facebook-sign-button mb-3"
-                    onClick={() => socialMediaSign("facebook")}
-                  >
-                    <FaFacebookF style={{ height: 16 }} className="mr-3" />
-                    <small className="sign-social-text">
-                      {" "}
-                      sign up with facebook{" "}
-                    </small>
-                  </Button>
-                  <div className="separator">or</div>
-                  {error.message && error.type === "signup" && (
-                    <Alert variant="danger" className="alert-error ">
+                  <h2 className="text-center mb-4 sign-form-text">Login</h2>
+                  {error.message && error.type === "signin" && (
+                    <Alert variant="danger" className="alert-error">
                       {" "}
                       {error.message}
                     </Alert>
                   )}
+
                   <Form
                     noValidate
                     validated={validated}
                     onSubmit={handleSubmit}
                   >
-                    <Form.Group id="firstName" className="mb-1">
-                      <Form.Label className="form-text">First name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        ref={firstNameRef}
-                        required
-                        placeholder="John"
-                        className="form-input"
-                        name="firstName"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a valid first name.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group id="lastName" className="mb-1">
-                      <Form.Label className="form-text">Last name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        ref={lastNameRef}
-                        required
-                        className="form-input"
-                        placeholder="Doe"
-                        name="lastName"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a valid last name.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group id="email" className="mb-1">
+                    <Form.Group id="email">
                       <Form.Label className="form-text">Email</Form.Label>
                       <Form.Control
                         type="email"
@@ -153,7 +102,7 @@ export default function SignUp() {
                         Please provide a valid email adress.
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group id="password" className="mb-1">
+                    <Form.Group id="password">
                       <Form.Label className="form-text">Password</Form.Label>
                       <div className="d-flex justify-content-center align-items-center">
                         <Form.Control
@@ -187,29 +136,26 @@ export default function SignUp() {
                         Password must be at least 6 characters
                       </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group>
-                      <Form.Check name="terms">
-                        <Form.Check.Input type="checkbox" required />
-                        <Form.Check.Label className="terms-text">
-                          I agree with terms and services
-                        </Form.Check.Label>
-                        <Form.Control.Feedback type="invalid">
-                          You must agree before submitting.
-                        </Form.Control.Feedback>
-                      </Form.Check>
-                    </Form.Group>
+                    <div className="mb-3 mt-3">
+                      <Link to="/forgot-password">
+                        <strong style={{ color: "#2798C6" }}>
+                          Forgot password?
+                        </strong>
+                      </Link>
+                    </div>
                     <Button
                       className="w-100 submit-form"
                       type="submit"
+                      style={{ borderRadius: 10 }}
                       disabled={isLoadingForm}
                     >
-                      <small className="submit-form-text">Create account</small>
+                      <small className="submit-form-text">Login</small>
                     </Button>
                   </Form>
-                  <div className="w-100 mt-2 terms-text">
-                    Have an account?{" "}
-                    <Link to="/signin" className="text-danger">
-                      <strong style={{ color: "#2798C6" }}>Login</strong>
+                  <div className="w-100 mt-4 terms-text">
+                    Don't have an account?{" "}
+                    <Link to="/signup">
+                      <strong style={{ color: "#2798C6" }}>Register</strong>
                     </Link>
                   </div>
                 </div>
