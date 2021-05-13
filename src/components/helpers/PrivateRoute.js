@@ -10,8 +10,20 @@ export function PrivateRoute({ component: Component, ...rest }) {
         return currentUser ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/signup" />
+          <Redirect to="/signin" />
         );
+      }}
+    ></Route>
+  );
+}
+
+export function SignPrivateRoute({ component: Component, ...rest }) {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return !currentUser ? <Component {...props} /> : <Redirect to="/" />;
       }}
     ></Route>
   );
