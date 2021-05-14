@@ -9,12 +9,9 @@ import {
   Alert,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
 
 import { ReactComponent as SignInImage } from "../../assets/svg/signIn.svg";
-import { FaFacebookF } from "react-icons/fa";
 import * as AIcons from "react-icons/ai";
 import "./sign.css";
 

@@ -1,0 +1,48 @@
+#overview-text {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 42px;
+  letter-spacing: 0.001em;
+}
+
+#add-company-card {
+  /* width: 519px; */
+  height: 94px;
+  background: #ffffff;
+  box-shadow: 0px 4px 30px rgba(24, 28, 75, 0.09);
+  border-radius: 10px;
+  padding: 20px;
+
+}
+
+#add-company-text-header {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #333333;
+}
+
+#add-compnay-text-description {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #828282;
+  letter-spacing: 0.001em;
+  display: block;
+}
+
+#plus-button {
+  width: 36px;
+  height: 36px;
+  background: #4149b9 !important;
+  border-color: #4149b9 !important;
+  box-shadow: 0px 4px 8px rgba(65, 73, 185, 0.14);
+  border-radius: 8px;
+
+}
