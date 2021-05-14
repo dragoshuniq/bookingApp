@@ -1,0 +1,60 @@
+.remove-all-margin {
+  margin: 0 !important;
+}
+.remove-all-padding {
+  padding: 0 !important;
+}
+
+#admin-container {
+  background-color: #e5e5e5 !important;
+  min-height: 100vh;
+}
+
+#logo-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+#sign-out-button {
+  background: #4149b9;
+  box-shadow: 0px 4px 8px rgba(65, 73, 185, 0.14) !important;
+  border-radius: 10px;
+  border-color: #4149b9 !important;
+  width: 91px;
+  height: 36px;
+}
+
+#user-image {
+  border-radius: 8px;
+  width: 47px;
+  height: 47px;
+}
+
+#admin-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+#admin-name-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #333333;
+}
+
+#admin-status-text {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4f4f4f;
+  display: block;
+}
