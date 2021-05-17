@@ -1,0 +1,32 @@
+.daily-time-text-info {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  text-transform: capitalize;
+  color: #333333;
+  text-transform: uppercase;
+}
+
+.switch-working-button {
+  width: 38px;
+  height: 22px;
+  background: #f29f57;
+  border-radius: 10px;
+}
+
+.custom-control-label::before {
+    background-color: #E0E0E0 !important;
+}
+
+.custom-switch .custom-control-label::after {
+    background-color: white !important;
+}
+
+
+
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #F29F57 !important;
+    border-color: #F29F57 !important;
+}
