@@ -58,3 +58,8 @@
   color: #4f4f4f;
   display: block;
 }
+
+.transparent-button {
+  background-color: transparent;
+  border-width: 0px;
+}

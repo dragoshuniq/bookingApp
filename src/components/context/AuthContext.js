@@ -9,6 +9,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  const [userData, setUserData] = useState();
   const [currentUser, setCurrentUser] = useState();
   const [error, setError] = useState({ error: "", message: "" });
 
@@ -21,10 +22,22 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      if (user) {
+        getUser(firebase.auth().currentUser.uid);
+      }
       setLoading(false);
     });
     return unsubscribe;
   }, []);
+
+  async function getUser(uid) {
+    return firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .get()
+      .then((doc) => setUserData(doc.data()));
+  }
 
   const displayError = (message, type) => {
     setError({ message, type });
@@ -65,6 +78,13 @@ export function AuthProvider({ children }) {
       .then((result) => {
         var credential = result.credential;
         var user = result.user;
+
+        const usr = {
+          displayName: user.displayName,
+          photo: user.photoURL,
+        };
+        setUserDB(firebase.auth().currentUser.uid, usr);
+
         setCurrentUser(user);
         var accessToken = credential.accessToken;
       })
@@ -74,6 +94,15 @@ export function AuthProvider({ children }) {
         var email = error.email;
         var credential = error.credential;
       });
+  }
+
+  async function setUserDB(uid, user) {
+    return firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .set(user)
+      .catch((e) => console.log(e));
   }
 
   const value = {
@@ -86,6 +115,8 @@ export function AuthProvider({ children }) {
     error,
     resetError,
     confirmPasswordReset,
+    setUserDB,
+    userData,
   };
   return (
     <AuthContext.Provider value={value}>

@@ -9,7 +9,7 @@ import AdminPanel from "./AdminPanel/AdminPanel";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute, SignPrivateRoute } from "./helpers/PrivateRoute";
-import { Container, Navbar, Button, Row, Col } from "react-bootstrap";
+import { AddCompanyProvider } from "./Dashboard/AddCompanyContext";
 
 function App() {
   return (
@@ -25,7 +25,9 @@ function App() {
           <SignPrivateRoute path="/reset-password" component={ResetPassword} />
 
           <AdminPanel>
-            <PrivateRoute exact path="/" component={Dashboard} />
+            <AddCompanyProvider>
+              <PrivateRoute exact path="/" component={Dashboard} />
+            </AddCompanyProvider>
           </AdminPanel>
         </Switch>
       </AuthProvider>

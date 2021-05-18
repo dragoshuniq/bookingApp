@@ -1,0 +1,128 @@
+.time-container {
+  display: flex;
+  /* width: 300px; */
+  margin: 10% auto;
+  position: relative;
+}
+
+
+
+.save-time-button {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #4149b9;
+  background: transparent;
+  border-width: 0px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+h1 {
+  text-align: center;
+}
+
+.picker {
+  position: relative;
+  /* width: 300px; */
+  overflow: hidden;
+  margin: 1rem auto 0;
+  /* outline: 1px solid #ccc; */
+  padding: 0px 20px;
+}
+
+.swiper-container {
+  width: 80px;
+  height: 410px;
+  float: left;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 2rem;
+  /* Center slide text vertically */
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+  cursor: default;
+  font-weight: bold;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  cursor: pointer;
+}
+
+.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+.vizor {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  height: 70px;
+  position: absolute;
+  top: 45%;
+  left: 1rem;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  line-height: 62px;
+}
+
+.vizor:before,
+.vizor:after {
+  display: inline-block;
+  line-height: inherit;
+  height: 100%;
+  position:absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.vizor:before {
+  left: 95px;
+}
+
+.vizor:after {
+  left: 175px;
+}
+
+.arrows .swiper-container:after,
+.arrows .swiper-container:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px;
+  border-color: transparent;
+  opacity: 0.5;
+}
+
+.arrows .swiper-container:before {
+  top: 0.5rem;
+  border-top-width: 0;
+  border-bottom-color: currentColor;
+}
+
+.arrows .swiper-container:after {
+  bottom: 0.5rem;
+  border-bottom-width: 0;
+  border-top-color: currentColor;
+}
