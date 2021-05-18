@@ -44,5 +44,8 @@
   border-color: #4149b9 !important;
   box-shadow: 0px 4px 8px rgba(65, 73, 185, 0.14);
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
 }

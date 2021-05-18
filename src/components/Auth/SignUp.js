@@ -44,7 +44,7 @@ export default function SignUp() {
     setIsLoadingForm(false);
   };
 
-  const { signUp, socialMediaSign, error } = useAuth();
+  const { signUp, socialMediaSign, error, setUserDB } = useAuth();
 
   return (
     <>
@@ -81,7 +81,7 @@ export default function SignUp() {
                     Create account
                   </h2>
                   <Button
-                    className="w-100 google-sign-button mb-3"
+                    className="w-100 google-sign-button mb-3 d-flex justify-content-center align-items-center"
                     onClick={() => socialMediaSign("google")}
                   >
                     <GoogleIcon style={{ height: 16 }} className="mr-3" />
@@ -91,7 +91,7 @@ export default function SignUp() {
                     </small>
                   </Button>
                   <Button
-                    className="w-100 facebook-sign-button mb-3"
+                    className="w-100 facebook-sign-button mb-3 d-flex justify-content-center align-items-center"
                     onClick={() => socialMediaSign("facebook")}
                   >
                     <FaFacebookF style={{ height: 16 }} className="mr-3" />

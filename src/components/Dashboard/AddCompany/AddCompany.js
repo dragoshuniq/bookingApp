@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import {
   Modal,
   Button,
@@ -8,18 +8,27 @@ import {
   FormFile,
   InputGroup,
 } from "react-bootstrap";
-import uniqueId from "lodash/uniqueId";
+import { useAddContext } from "../AddCompanyContext";
+import { auth } from "../../../firebase";
+
+import firebase from "firebase";
+
 import { GoPlus } from "react-icons/go";
 import dayjs from "dayjs";
 import "./add-company.css";
-import { set } from "lodash";
-import EditTime from "../EditTime/EditTime";
+
 function AddCompany(props) {
+  const [validatedProfile, setValidatedProfile] = useState(false);
+  const [validatedServices, setValidatedServices] = useState(false);
+
   const [activeButton, setActiveButton] = useState("profile");
 
-  const onClickActiveButton = (button) => {
-    setActiveButton(button);
-  };
+  const [file, setFile] = React.useState(null);
+  const [fileUrl, setFileUrl] = React.useState(null);
+  const companyNameRef = useRef();
+  const companyDescriptionRef = useRef();
+
+  const { setIsEditTime } = useAddContext();
 
   const activeButtonProps = {
     textDecoration: "underline",
@@ -28,21 +37,68 @@ function AddCompany(props) {
     textDecorationThickness: 2,
   };
 
-  const [validated, setValidated] = useState(false);
+  const onClickActiveButton = (button) => {
+    setActiveButton(button);
+  };
 
-  const handleSubmit = (event) => {
+  const onFileChange = async (e) => {
+    var file = e.target.files[0];
+    setFile(file);
+  };
+
+  const uploadImageCloud = () => {
+    try {
+      const fileRef = firebase.storage().ref().child(file.name);
+      fileRef.put(file);
+      setFileUrl(fileRef.getDownloadURL());
+      console.log(fileUrl);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const addCompany = () => {
+    uploadImageCloud();
+    firebase
+      .firestore()
+      .collection("companies")
+      .doc()
+      .set({
+        photo: fileUrl,
+        companyName: companyNameRef.current.value,
+        companyDescription: companyDescriptionRef.current.value,
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleSubmitProfile = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidatedProfile(true);
+    addCompany();
+  };
+  const handleSubmitServices = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
 
-    setValidated(true);
+    setValidatedServices(true);
+    uploadImageCloud();
+    addCompany();
   };
 
   const Profile = () => {
     return (
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form
+        noValidate
+        validated={validatedProfile}
+        onSubmit={handleSubmitProfile}
+      >
         <Form.Group>
           <Form.Label className="add-company-form-text-label">
             Company logo
@@ -54,6 +110,7 @@ function AddCompany(props) {
             <Form.File.Input
               accept="image/x-png,image/gif,image/jpeg"
               required
+              onChange={onFileChange}
             />
           </FormFile>
         </Form.Group>
@@ -67,6 +124,7 @@ function AddCompany(props) {
             type="text"
             placeholder="Lorem company"
             className="add-company-input"
+            ref={companyNameRef}
           />
         </Form.Group>
 
@@ -80,6 +138,7 @@ function AddCompany(props) {
             placeholder="Company description"
             className="add-company-input"
             required
+            ref={companyDescriptionRef}
           />
         </Form.Group>
 
@@ -91,12 +150,6 @@ function AddCompany(props) {
   };
 
   const Services = () => {
-    const [isEditTimeOpen, setIsEditTimeOpen] = useState(true);
-
-    const [duration, setDuration] = useState(30);
-    const [price, setPrice] = useState(10);
-    const [capacity, setCapacity] = useState(1);
-
     const [services, setServices] = useState([
       {
         duration: 30,
@@ -123,7 +176,7 @@ function AddCompany(props) {
       const srvs = JSON.parse(JSON.stringify(services));
       srvs[ind][type] = val;
       setServices(srvs);
-      console.log(services[ind]);
+      // console.log(services[ind]);
     };
 
     const myDynamicForm = services.map((val, ind) => {
@@ -222,7 +275,7 @@ function AddCompany(props) {
                   <button
                     className="service-availability-edit-button"
                     type="button"
-                    onClick={() => setIsEditTimeOpen(!isEditTimeOpen)}
+                    onClick={() => setIsEditTime(true)}
                   >
                     EDIT
                   </button>
@@ -318,12 +371,11 @@ function AddCompany(props) {
     });
 
     return (
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <EditTime
-          show={isEditTimeOpen}
-          onHide={() => setIsEditTimeOpen(false)}
-          id="edit-time-modal"
-        />
+      <Form
+        noValidate
+        validated={validatedServices}
+        onSubmit={handleSubmitServices}
+      >
         {myDynamicForm}
         <Button type="submit" className="add-company-submit-button mt-4">
           Save services
@@ -385,7 +437,7 @@ function AddCompany(props) {
           </div>
           {activeButton === "profile" && <Profile />}
           {activeButton === "services" && <Services />}
-          {activeButton === "payment" && <Profile />}
+          {activeButton === "payment" && <div />}
         </Modal.Body>
       </Modal>
     </>
