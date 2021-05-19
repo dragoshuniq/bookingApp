@@ -14,7 +14,6 @@
   box-shadow: 0px 4px 30px rgba(24, 28, 75, 0.09);
   border-radius: 10px;
   padding: 20px;
-
 }
 
 #add-company-text-header {
@@ -47,5 +46,72 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
+.company-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 30px rgba(24, 28, 75, 0.09) !important;
+  border-radius: 10px !important;
+}
+
+.company-card-logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 18px !important;
+}
+
+.company-card-description {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.001em;
+  color: #828282;
+}
+
+.company-card-title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.001em;
+  color: #333333;
+}
+
+.company-card-crud-buttons {
+  width: 100%;
+
+  border: 1px solid #bdbdbd !important;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: transparent !important;
+  padding: 16px;
+}
+.company-card-crud-buttons small {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  color: #828282;
+}
+
+.company-card-view-company-button {
+  width: 100%;
+  background: #4149b9 !important;
+  box-shadow: 0px 4px 8px rgba(65, 73, 185, 0.14) !important;
+  border-radius: 8px;
+  padding: 16px;
+  border: 0px;
+}
+
+.company-card-view-company-button div {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 14px;
+  color: #f2f2f2;
 }

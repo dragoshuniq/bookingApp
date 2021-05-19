@@ -1,9 +1,17 @@
-import React, { useState, useCallback } from "react";
-import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import 'swiper/swiper.scss';
-
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Mousewheel,
+} from "swiper";
 import "./time.css";
+import { useAddContext } from "../AddCompanyContext";
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Mousewheel]);
 
 const hours = () => {
   var times = [];
@@ -25,11 +33,37 @@ function SelectTime(props) {
   var settings = {
     slidesPerView: 3,
     loop: true,
-    loopAdditionalSlides: 20,
+    loopAdditionalSlides: 0,
     direction: "vertical",
-    mousewheelControl: true,
     centeredSlides: true,
     slideToClickedSlide: true,
+  };
+  const {
+    currentTimeEdit,
+    currentTimeTable,
+    setCurrentTimeTable,
+    setIsSelectTime,
+  } = useAddContext();
+  const [hour, setHour] = useState(currentTimeEdit.hour);
+  const [min, setMin] = useState(currentTimeEdit.min);
+
+  const onSaveTime = () => {
+    var minutes = min < 0 ? min + 60 : min;
+    var hours = hour < 0 ? hour + 24 : hour;
+
+    var changeType = currentTimeEdit.type === "open" ? "openTime" : "closeTime";
+    setCurrentTimeTable({
+      ...currentTimeTable,
+      [currentTimeEdit.day]: {
+        ...currentTimeTable[currentTimeEdit.day],
+        [changeType]:
+          ("0" + hours.toString()).slice(-2) +
+          "." +
+          ("0" + minutes.toString()).slice(-2),
+      },
+    });
+
+    setIsSelectTime(false);
   };
   return (
     <>
@@ -41,18 +75,20 @@ function SelectTime(props) {
         style={{ overflow: "hidden" }}
       >
         <Modal.Header closeButton>
-          <Modal.Title id="add-company-modal-header-label">
-            Open Time
+          <Modal.Title style={{ textTransform: "capitalize" }}>
+            {currentTimeEdit.type} Time
           </Modal.Title>
         </Modal.Header>
         <div className="picker">
           <Swiper
             spaceBetween={20}
-            onSlideChange={() => console.log("slide change")}
+            onSlideChange={(slider) => setHour(slider.activeIndex - 3)}
             onSwiper={(swiper) => console.log(swiper)}
             {...settings}
-            initialSlide={0}
+            initialSlide={currentTimeEdit.hour}
             className="swiper-container hours"
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
           >
             {hours().map((hour, index) => {
               return (
@@ -64,11 +100,13 @@ function SelectTime(props) {
           </Swiper>
           <Swiper
             spaceBetween={20}
-            onSlideChange={() => console.log("slide change")}
+            onSlideChange={(slider) => setMin(slider.activeIndex - 3)}
             onSwiper={(swiper) => console.log(swiper)}
             {...settings}
             className="swiper-container minutes"
-
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            initialSlide={currentTimeEdit.min}
           >
             {minutes().map((min, index) => {
               return (
@@ -79,9 +117,11 @@ function SelectTime(props) {
             })}
           </Swiper>
         </div>
-        <div class="vizor"></div>
+        <div className="vizor"></div>
         <Modal.Footer style={{ borderWidth: 0 }}>
-          <button className="save-time-button mr-4">Save</button>
+          <button className="save-time-button mr-4" onClick={onSaveTime}>
+            Save
+          </button>
         </Modal.Footer>
       </Modal>
     </>

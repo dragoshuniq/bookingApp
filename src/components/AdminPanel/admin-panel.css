@@ -63,3 +63,16 @@
   background-color: transparent;
   border-width: 0px;
 }
+
+.admin-panel {
+  overflow: hidden;
+  /* width: vw; */
+  height: 100vh;
+}
+
+
+.admin-panel-children {
+  overflow: auto;
+  width: auto;
+  height: 85vh;
+}
