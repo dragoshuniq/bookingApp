@@ -8,8 +8,8 @@ import "./admin-panel.css";
 function AdminPanel({ children }) {
   const { userData, signOut } = useAuth();
   return (
-    <>
-      <Navbar expand="lg" style={{ backgroundColor: "white" }}>
+    <div className="admin-panel">
+      <Navbar expand="lg" style={{ backgroundColor: "white",height:"10vh" }}>
         <Navbar.Brand
           href="#home"
           className="d-flex justify-content-center align-items-center"
@@ -66,15 +66,15 @@ function AdminPanel({ children }) {
             md={2}
             lg={2}
             xl={2}
-            style={{ backgroundColor: "white", height: "100vh" }}
+            style={{ backgroundColor: "white", height: "90vh" }}
           >
             {/* <Sidebar /> */}
           </Col>
           {/* children content  */}
-          <Col>{children}</Col>
+          <Col className="admin-panel-children ">{children}</Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 }
 
