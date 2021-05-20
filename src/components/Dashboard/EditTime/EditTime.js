@@ -11,7 +11,7 @@ import {
 import "./edittime.css";
 import dayjs from "dayjs";
 import * as BIcons from "react-icons/bi";
-import { useAddContext } from "../AddCompanyContext";
+import { useAdminContext } from "../../context/AdminContext";
 
 function EditTime(props) {
   const {
@@ -24,7 +24,7 @@ function EditTime(props) {
     services,
     currentTimeTableIndex,
     setIsEditTime,
-  } = useAddContext();
+  } = useAdminContext();
 
   const onSaveEditTimeTable = () => {
     const srv = JSON.parse(JSON.stringify(services));

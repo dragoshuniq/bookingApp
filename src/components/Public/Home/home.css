@@ -1,0 +1,70 @@
+.home-container {
+  background-color: #f1f5f8;
+}
+
+.home-title-text {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 58px;
+  color: #333333;
+}
+
+.home-undertitle-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  color: #4f4f4f;
+}
+
+.home-button {
+  width: 207px;
+  box-shadow: 0px 10px 25px 6px rgba(239, 99, 19, 0.15);
+  border-radius: 8px;
+  border-width: 0px;
+  background-color: #ef6313 !important;
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+  color: #f2f2f2;
+  padding: 10px;
+}
+
+.home-icon-wrapper {
+  padding: 20px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.home-icon-text-bottom {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  color: #333333;
+}
+
+.home-icon-subtext-bottom {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  color: #4f4f4f;
+}
+
+#border-icons {
+  position: absolute;
+  border-top: 3px dashed #bbb;
+  width: 80%;
+}
+

@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import firebase from "firebase";
 const CompanyContext = React.createContext();
 
-export function useAddContext() {
+export function useAdminContext() {
   return useContext(CompanyContext);
 }
 
-export function AddCompanyProvider({ children }) {
+export function AdminProvider({ children }) {
   const defaultService = {
     duration: 30,
     price: 10,
@@ -23,11 +23,6 @@ export function AddCompanyProvider({ children }) {
       saturday: { isOpen: false, openTime: "00.00", closeTime: "00.00" },
     },
   };
-  const [currentTimeTable, setCurrentTimeTable] = useState(
-    defaultService.availability
-  );
-  const [currentTimeTableIndex, setCurrentTimeTableIndex] = useState(0);
-  const [services, setServices] = useState([defaultService]);
 
   const addService = () => {
     setServices([...services, defaultService]);
@@ -68,8 +63,17 @@ export function AddCompanyProvider({ children }) {
   const [isEditTime, setIsEditTime] = useState(false);
   const [isSelectTime, setIsSelectTime] = useState(false);
   const [activeButton, setActiveButton] = useState("profile");
-  const [file, setFile] = React.useState(null);
-  const [companies, setCompanies] = React.useState([]);
+  const [file, setFile] = useState(null);
+  const [companies, setCompanies] = useState([]);
+  const [isEditCompany, setIsEditCompany] = useState(false);
+  const [companyToEdit, setCompanyToEdit] = useState(false);
+
+  const [currentTimeTable, setCurrentTimeTable] = useState(
+    defaultService.availability
+  );
+  const [currentTimeTableIndex, setCurrentTimeTableIndex] = useState(0);
+  const [services, setServices] = useState([defaultService]);
+  const [isEditServiceShow, setIsEditServiceShow] = useState(false);
 
   const onClickSwitch = (day) => {
     setCurrentTimeTable({
@@ -84,7 +88,7 @@ export function AddCompanyProvider({ children }) {
   useEffect(() => {
     var unsubscribe = getCompanies();
     return unsubscribe;
-  }, [isAddCompany, isDeleteConfirmShow]);
+  }, [isAddCompany, isDeleteConfirmShow, isEditCompany]);
 
   const getCompanies = () => {
     return firebase
@@ -109,11 +113,11 @@ export function AddCompanyProvider({ children }) {
       .doc(id)
       .delete()
       .then(() => {
-        console.log("Document successfully deleted!");
+        // console.log("Document successfully deleted!");
         setIsDeleteConfirmShow({ show: false, id: "" });
       })
       .catch((error) => {
-        console.error("Error removing document: ", error);
+        // console.error("Error removing document: ", error);
       });
   };
 
@@ -133,6 +137,9 @@ export function AddCompanyProvider({ children }) {
     defaultService,
     services,
     currentTimeTableIndex,
+    isEditCompany,
+    companyToEdit,
+    isEditServiceShow,
     setIsAddCompany,
     setIsEditTime,
     setIsSelectTime,
@@ -149,6 +156,9 @@ export function AddCompanyProvider({ children }) {
     updateService,
     setServices,
     setCurrentTimeTableIndex,
+    setIsEditCompany,
+    setCompanyToEdit,
+    setIsEditServiceShow,
   };
   return (
     <CompanyContext.Provider value={value}>{children}</CompanyContext.Provider>

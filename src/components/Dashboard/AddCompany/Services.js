@@ -8,13 +8,23 @@ import {
   FormFile,
   InputGroup,
 } from "react-bootstrap";
-import { useAddContext } from "../AddCompanyContext";
+import { useAdminContext } from "../../context/AdminContext";
 
 import firebase from "firebase";
 
 import "./add-company.css";
 
 function Services() {
+  const [duration, setDuration] = useState(
+    Array.from({ length: 7 }, (_, i) => (i + 1) * 30)
+  );
+  const [price, setPrice] = useState(
+    Array.from({ length: 7 }, (_, i) => (i + 1) * 10)
+  );
+
+  const [customDuration, setCustomDuration] = useState();
+  const [customPrice, setCustomPrice] = useState();
+
   const {
     setIsEditTime,
     setCurrentTimeTable,
@@ -22,7 +32,9 @@ function Services() {
     updateService,
     services,
     setCurrentTimeTableIndex,
-  } = useAddContext();
+    currentDocID,
+    setIsAddCompany,
+  } = useAdminContext();
   const [validatedServices, setValidatedServices] = useState(false);
 
   const buttonSelectedStyle = {
@@ -37,46 +49,47 @@ function Services() {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    addServices();
     setValidatedServices(true);
   };
 
-  const myDynamicForm = services.map((val, ind) => {
-    const priceButtons = Array.from({ length: 7 }, (_, i) => i + 1).map(
-      (value, index) => {
-        return (
-          <button
-            type="button"
-            className="service-select-value-button mr-3 mb-2"
-            key={index}
-            style={
-              services[ind].price === value * 10 ? buttonSelectedStyle : null
-            }
-            onClick={() => updateService(value * 10, ind, "price")}
-          >
-            {value * 10}
-          </button>
-        );
-      }
-    );
+  const addServices = () => {
+    firebase
+      .firestore()
+      .collection("companies")
+      .doc(currentDocID)
+      .set({ services: services }, { merge: true })
+      .then(() => setIsAddCompany(false));
+  };
 
-    const durationButtons = Array.from({ length: 7 }, (_, i) => i + 1).map(
-      (value, index) => {
-        return (
-          <button
-            type="button"
-            className="service-select-value-button mr-2 mb-2"
-            key={index}
-            style={
-              services[ind].duration === value * 30 ? buttonSelectedStyle : null
-            }
-            onClick={() => updateService(value * 30, ind, "duration")}
-          >
-            {value * 30}
-          </button>
-        );
-      }
-    );
+  const myDynamicForm = services.map((val, ind) => {
+    const priceButtons = price.map((value, index) => {
+      return (
+        <button
+          type="button"
+          className="service-select-value-button mr-3 mb-2"
+          key={index}
+          style={services[ind].price === value ? buttonSelectedStyle : null}
+          onClick={() => updateService(value, ind, "price")}
+        >
+          {value}
+        </button>
+      );
+    });
+
+    const durationButtons = duration.map((value, index) => {
+      return (
+        <button
+          type="button"
+          className="service-select-value-button mr-2 mb-2"
+          key={index}
+          style={services[ind].duration === value ? buttonSelectedStyle : null}
+          onClick={() => updateService(value, ind, "duration")}
+        >
+          {value}
+        </button>
+      );
+    });
 
     const capacityButtons = Array.from({ length: 9 }, (_, i) => i + 1).map(
       (value, index) => {
@@ -176,9 +189,18 @@ function Services() {
               type="text"
               placeholder="220 min"
               className="service-add-manually-input"
+              onChange={(e) => setCustomDuration(e.target.value)}
+              value={customDuration && customDuration}
             />
 
-            <button className="service-add-manually-button" type="button">
+            <button
+              className="service-add-manually-button"
+              type="button"
+              onClick={() => {
+                setDuration([...duration, customDuration]);
+                setCustomDuration("");
+              }}
+            >
               Add duration
             </button>
           </div>
@@ -193,8 +215,17 @@ function Services() {
               type="text"
               placeholder="80 RON"
               className="service-add-manually-input"
+              onChange={(e) => setCustomPrice(e.target.value)}
+              value={customPrice && customPrice}
             />
-            <button className="service-add-manually-button" type="button">
+            <button
+              className="service-add-manually-button"
+              type="button"
+              onClick={() => {
+                setPrice([...price, customPrice]);
+                setCustomPrice("");
+              }}
+            >
               Add price
             </button>
           </div>

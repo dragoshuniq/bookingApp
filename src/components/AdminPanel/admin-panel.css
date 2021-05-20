@@ -66,13 +66,12 @@
 
 .admin-panel {
   overflow: hidden;
-  /* width: vw; */
+  width: 100vw;
   height: 100vh;
 }
 
-
 .admin-panel-children {
-  overflow: auto;
-  width: auto;
+  overflow: scroll;
   height: 85vh;
+  overflow-x: hidden
 }

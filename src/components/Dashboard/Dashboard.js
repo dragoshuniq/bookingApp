@@ -5,9 +5,10 @@ import EditTime from "./EditTime/EditTime";
 import SelectTime from "./Time/SelectTime";
 import DeleteCompany from "./DeleteCompany/DeleteCompany";
 import ViewCompany from "./ViewCompany/ViewCompany";
+import EditCompany from "./EditCompany/EditCompany";
 
 import { useAuth } from "../context/AuthContext";
-import { useAddContext } from "./AddCompanyContext";
+import { useAdminContext } from "../context/AdminContext";
 import { HiOutlinePencil } from "react-icons//hi";
 import { FiTrash } from "react-icons/fi";
 import { GoPlus } from "react-icons/go";
@@ -26,11 +27,15 @@ function Dashboard(props) {
     isDeleteConfirmShow,
     setIsViewCompanyShow,
     isViewCompanyShow,
-  } = useAddContext();
+    isEditCompany,
+    setIsEditCompany,
+    setCompanyToEdit,
+    setServices,
+  } = useAdminContext();
 
-  const renderCompanies = companies.map((comp) => {
+  const renderCompanies = companies && companies.map((comp) => {
     return (
-      <Col md={6} className="mt-5" key={comp.id}>
+      <Col md={6} className="mt-5 d-flex align-items-center" key={comp.id}>
         <Card className="company-card">
           <Card.Body>
             <Row>
@@ -63,6 +68,11 @@ function Dashboard(props) {
                 <button
                   className="company-card-crud-buttons d-flex justify-content-center align-items-center"
                   type="button"
+                  onClick={() => {
+                    setIsEditCompany(true);
+                    setCompanyToEdit(comp);
+                    setServices(comp.services);
+                  }}
                 >
                   <HiOutlinePencil className="mr-1" size={14} color="#828282" />
                   <small>Edit</small>
@@ -101,7 +111,7 @@ function Dashboard(props) {
   });
 
   return (
-    <>
+    <div className="admin-panel-children">
       <div className="mt-4 mb-4">
         <small id="overview-text" className="">
           Overview
@@ -141,7 +151,8 @@ function Dashboard(props) {
           onHide={() => setIsViewCompanyShow({ show: false, company: {} })}
           animation={false}
         />
-        <Col md={6}>
+        <EditCompany show={isEditCompany} backdrop="static" animation={false} />
+        <Col md={6} className="d-flex align-items-center">
           <Card id="add-company-card">
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
@@ -160,7 +171,7 @@ function Dashboard(props) {
         </Col>
       </Row>
       <Row>{renderCompanies}</Row>
-    </>
+    </div>
   );
 }
 

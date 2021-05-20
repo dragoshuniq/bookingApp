@@ -8,13 +8,13 @@ import {
   FormFile,
   InputGroup,
 } from "react-bootstrap";
-import { useAddContext } from "../AddCompanyContext";
+import { useAdminContext } from "../../context/AdminContext";
 import { ReactComponent as TrashImage } from "../../../assets/svg/deleteTrash.svg";
 import "./delete-company.css";
 import firebase from "firebase";
 
 function DeleteCompany(props) {
-  const { deleteCompany, isDeleteConfirmShow } = useAddContext();
+  const { deleteCompany, isDeleteConfirmShow } = useAdminContext();
 
   return (
     <>

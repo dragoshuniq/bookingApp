@@ -14,6 +14,7 @@
   box-shadow: 0px 4px 30px rgba(24, 28, 75, 0.09);
   border-radius: 10px;
   padding: 20px;
+  width: 80%;
 }
 
 #add-company-text-header {
@@ -52,12 +53,15 @@
   background: #ffffff;
   box-shadow: 0px 4px 30px rgba(24, 28, 75, 0.09) !important;
   border-radius: 10px !important;
+  width: 80%;
 }
 
 .company-card-logo {
   width: 140px;
   height: 140px;
   border-radius: 18px !important;
+  object-fit: cover;
+
 }
 
 .company-card-description {
@@ -87,7 +91,7 @@
   box-sizing: border-box;
   border-radius: 8px;
   background-color: transparent !important;
-  padding: 16px;
+  padding: 10px;
 }
 .company-card-crud-buttons small {
   font-family: Rubik;
@@ -103,7 +107,7 @@
   background: #4149b9 !important;
   box-shadow: 0px 4px 8px rgba(65, 73, 185, 0.14) !important;
   border-radius: 8px;
-  padding: 16px;
+  padding: 12px;
   border: 0px;
 }
 

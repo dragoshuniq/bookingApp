@@ -9,7 +9,7 @@ import SwiperCore, {
   Mousewheel,
 } from "swiper";
 import "./time.css";
-import { useAddContext } from "../AddCompanyContext";
+import { useAdminContext } from "../../context/AdminContext";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Mousewheel]);
 
@@ -43,7 +43,7 @@ function SelectTime(props) {
     currentTimeTable,
     setCurrentTimeTable,
     setIsSelectTime,
-  } = useAddContext();
+  } = useAdminContext();
   const [hour, setHour] = useState(currentTimeEdit.hour);
   const [min, setMin] = useState(currentTimeEdit.min);
 

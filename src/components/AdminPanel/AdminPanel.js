@@ -9,7 +9,7 @@ function AdminPanel({ children }) {
   const { userData, signOut } = useAuth();
   return (
     <div className="admin-panel">
-      <Navbar expand="lg" style={{ backgroundColor: "white",height:"10vh" }}>
+      <Navbar expand="lg" style={{ backgroundColor: "white" }}>
         <Navbar.Brand
           href="#home"
           className="d-flex justify-content-center align-items-center"
@@ -55,23 +55,13 @@ function AdminPanel({ children }) {
         id="admin-container"
         className="remove-all-margin remove-all-padding"
       >
-        <Row>
-          <Col style={{ backgroundColor: "red" }}></Col>
-        </Row>
-        <Row>
+        <Row style={{height:"100vh"}}>
           {/* admin */}
-          <Col
-            xs={2}
-            sm={2}
-            md={2}
-            lg={2}
-            xl={2}
-            style={{ backgroundColor: "white", height: "90vh" }}
-          >
-            {/* <Sidebar /> */}
+          <Col xs={2} sm={2} md={2} lg={2} xl={2}>
+            <Sidebar />
           </Col>
           {/* children content  */}
-          <Col className="admin-panel-children ">{children}</Col>
+          <Col>{children}</Col>
         </Row>
       </Container>
     </div>
