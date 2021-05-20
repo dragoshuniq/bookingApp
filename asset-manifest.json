@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/bookingApp/static/css/main.467cb910.chunk.css",
+    "main.js": "/bookingApp/static/js/main.4194966e.chunk.js",
+    "main.js.map": "/bookingApp/static/js/main.4194966e.chunk.js.map",
+    "runtime-main.js": "/bookingApp/static/js/runtime-main.295684c1.js",
+    "runtime-main.js.map": "/bookingApp/static/js/runtime-main.295684c1.js.map",
+    "static/css/2.150d169a.chunk.css": "/bookingApp/static/css/2.150d169a.chunk.css",
+    "static/js/2.7a704bd0.chunk.js": "/bookingApp/static/js/2.7a704bd0.chunk.js",
+    "static/js/2.7a704bd0.chunk.js.map": "/bookingApp/static/js/2.7a704bd0.chunk.js.map",
+    "index.html": "/bookingApp/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/bookingApp/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.467cb910.chunk.css.map": "/bookingApp/static/css/main.467cb910.chunk.css.map",
+    "static/js/2.7a704bd0.chunk.js.LICENSE.txt": "/bookingApp/static/js/2.7a704bd0.chunk.js.LICENSE.txt",
+    "static/media/bookingIcon.39ffe2d4.svg": "/bookingApp/static/media/bookingIcon.39ffe2d4.svg",
+    "static/media/bookingLogo.e7826591.svg": "/bookingApp/static/media/bookingLogo.e7826591.svg",
+    "static/media/dashboardIcon.482e3117.svg": "/bookingApp/static/media/dashboardIcon.482e3117.svg",
+    "static/media/deleteTrash.3051de29.svg": "/bookingApp/static/media/deleteTrash.3051de29.svg",
+    "static/media/elipse1.68e789a0.svg": "/bookingApp/static/media/elipse1.68e789a0.svg",
+    "static/media/elipse2.e8bf02b3.svg": "/bookingApp/static/media/elipse2.e8bf02b3.svg",
+    "static/media/elipse3.8576989a.svg": "/bookingApp/static/media/elipse3.8576989a.svg",
+    "static/media/elipse4.1d559143.svg": "/bookingApp/static/media/elipse4.1d559143.svg",
+    "static/media/flightBooking.d9f1591f.svg": "/bookingApp/static/media/flightBooking.d9f1591f.svg",
+    "static/media/google.bbce75f8.svg": "/bookingApp/static/media/google.bbce75f8.svg",
+    "static/media/resetPassword.750bcb41.svg": "/bookingApp/static/media/resetPassword.750bcb41.svg",
+    "static/media/serviceIcon.8380c8e8.svg": "/bookingApp/static/media/serviceIcon.8380c8e8.svg",
+    "static/media/signIn.7b7794ee.svg": "/bookingApp/static/media/signIn.7b7794ee.svg",
+    "static/media/signUp.7e56e2e9.svg": "/bookingApp/static/media/signUp.7e56e2e9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.295684c1.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.7a704bd0.chunk.js",
+    "static/css/main.467cb910.chunk.css",
+    "static/js/main.4194966e.chunk.js"
+  ]
+}
