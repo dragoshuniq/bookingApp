@@ -12,16 +12,13 @@ import { useAdminContext } from "../../context/AdminContext";
 
 import firebase from "firebase";
 
-import "./add-company.css";
-
-function Profile() {
-  const { file, setFile, setCurrentDocID, setActiveButton } = useAdminContext();
+function EditProfile() {
+  const { setActiveButton, companyToEdit, setCompanyToEdit } =
+    useAdminContext();
 
   const [validatedProfile, setValidatedProfile] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const companyNameRef = useRef();
-  const companyDescriptionRef = useRef();
+  const [file, setFile] = useState(null);
   const onFileChange = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -35,25 +32,32 @@ function Profile() {
       const fileRef = firebase.storage().ref().child(file.name);
       await fileRef.put(file);
       var url = await fileRef.getDownloadURL();
-      addCompany(url);
+      updateCompany(url);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const addCompany = (url) => {
+  const onChangeComapanyValue = (val, type) => {
+    setCompanyToEdit({ ...companyToEdit, [type]: val });
+  };
+
+  const updateCompany = (url) => {
     setLoading(true);
     firebase
       .firestore()
       .collection("companies")
-      .add({
-        photo: url,
-        companyName: companyNameRef.current.value,
-        companyDescription: companyDescriptionRef.current.value,
-        status: true,
-      })
-      .then((docRef) => {
-        setCurrentDocID(docRef.id);
+      .doc(companyToEdit.id)
+      .set(
+        {
+          photo: url,
+          companyName: companyToEdit.companyName,
+          companyDescription: companyToEdit.companyDescription,
+          status: true,
+        },
+        { merge: true }
+      )
+      .then(() => {
         setActiveButton("services");
       })
       .catch((e) => console.log(e));
@@ -66,10 +70,9 @@ function Profile() {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     }
-    uploadImageCloud();
+    file ? uploadImageCloud() : updateCompany(companyToEdit.photo);
     setValidatedProfile(true);
   };
-
   return (
     <Form
       noValidate
@@ -85,7 +88,9 @@ function Profile() {
           required
           className="add-company-logo"
           style={{
-            backgroundImage: file && `url(${URL.createObjectURL(file)})`,
+            backgroundImage: `url(${
+              file ? URL.createObjectURL(file) : companyToEdit.photo
+            })`,
           }}
         >
           {/* <GoPlus id="add-image-logo" /> */}
@@ -107,8 +112,9 @@ function Profile() {
           type="text"
           placeholder="Lorem company"
           className="add-company-input"
-          ref={companyNameRef}
           name="company-name"
+          value={companyToEdit && companyToEdit.companyName}
+          onChange={(e) => onChangeComapanyValue(e.target.value, "companyName")}
         />
       </Form.Group>
 
@@ -123,7 +129,10 @@ function Profile() {
           className="add-company-input"
           required
           name="company-description"
-          ref={companyDescriptionRef}
+          value={companyToEdit && companyToEdit.companyDescription}
+          onChange={(e) =>
+            onChangeComapanyValue(e.target.value, "companyDescription")
+          }
         />
       </Form.Group>
 
@@ -134,4 +143,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default EditProfile;

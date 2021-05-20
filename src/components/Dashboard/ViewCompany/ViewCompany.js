@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import { Modal, Button, Row, Col, Card, Container } from "react-bootstrap";
-import { useAddContext } from "../AddCompanyContext";
+import { useAdminContext } from "../../context/AdminContext";
 import { CgBriefcase, CgCalendarDates } from "react-icons/cg";
 import { AiOutlineClockCircle, AiOutlineDollarCircle } from "react-icons/ai";
 
 import firebase from "firebase";
 import "./view-company.css";
 function ViewCompany(props) {
-  const { isViewCompanyShow, setIsViewCompanyShow } = useAddContext();
+  const { isViewCompanyShow, setIsViewCompanyShow } = useAdminContext();
   const serviceTest = [
     {
       label: "Trimming",
@@ -18,39 +18,61 @@ function ViewCompany(props) {
     },
   ];
 
-  const renderServices = serviceTest.map((serv,ind) => {
-    return (
-      <Container key={ind}>
-        <Row>
-          <div className="d-flex justify-content-center align-items-center">
-            <CgBriefcase className="mr-2" color="#200E32" />
-            <small className="view-company-description"> {serv.label}</small>
-          </div>
-        </Row>
-        <Row>
-          <div className="d-flex justify-content-center align-items-center">
-            <AiOutlineClockCircle className="mr-2" color="#200E32" />
-            <small className="view-company-description"> {serv.time}</small>
-          </div>
-        </Row>
-        <Row>
-          <div className="d-flex justify-content-center align-items-center">
-            <AiOutlineDollarCircle className="mr-2" color="#200E32" />
-            <small className="view-company-description">
-              {" "}
-              {serv.priceMin} - {serv.priceMax} RON
-            </small>
-          </div>
-        </Row>
-        <Row>
-          <div className="d-flex justify-content-center align-items-center">
-            <CgCalendarDates className="mr-2" color="#200E32" />
-            <small className="view-company-description"> {serv.days}</small>
-          </div>
-        </Row>
-      </Container>
-    );
-  });
+  const renderServices =
+    isViewCompanyShow.show &&
+    Object.keys(isViewCompanyShow.company.services).map((key, ind) => {
+      return (
+        <Container key={ind} className="mt-2">
+          <Row>
+            <div className="d-flex justify-content-center align-items-center">
+              <CgBriefcase className="mr-2" color="#200E32" />
+              <small className="view-company-description">
+                {isViewCompanyShow.company.services[ind].name}
+              </small>
+            </div>
+          </Row>
+          <Row>
+            <div className="d-flex justify-content-center align-items-center">
+              <AiOutlineClockCircle className="mr-2" color="#200E32" />
+              <small className="view-company-description"> 08.00 - 19.00</small>
+            </div>
+          </Row>
+          <Row>
+            <div className="d-flex justify-content-center align-items-center">
+              <AiOutlineDollarCircle className="mr-2" color="#200E32" />
+              <small className="view-company-description">
+                {" "}
+                {isViewCompanyShow.company.services[ind].price} RON
+              </small>
+            </div>
+          </Row>
+          <Row>
+            <div className="d-flex justify-content-center align-items-center">
+              <CgCalendarDates className="" color="#200E32" />
+              <div className="view-company-description d-flex ml-2">
+                {Object.keys(
+                  isViewCompanyShow.company.services[ind].availability
+                ).map((k, i) => {
+                  return (
+                    <div key={k}>
+                      {isViewCompanyShow.company.services[ind].availability[k]
+                        .isOpen && (
+                        <div className="d-block text-capitalize mr-2">
+                          {isViewCompanyShow.show &&
+                            isViewCompanyShow.company.services[ind]
+                              .availability[k].isOpen &&
+                            k.slice(0, 3)}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Row>
+        </Container>
+      );
+    });
   return (
     <>
       <Modal

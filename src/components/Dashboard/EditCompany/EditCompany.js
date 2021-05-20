@@ -1,21 +1,10 @@
 import React, { useState, useRef } from "react";
-import {
-  Modal,
-  Button,
-  Row,
-  Col,
-  Form,
-  FormFile,
-  InputGroup,
-} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { useAdminContext } from "../../context/AdminContext";
-import Profile from "./Profile";
-import Services from "./Services";
 import firebase from "firebase";
-
-import "./add-company.css";
-
-function AddCompany(props) {
+import EditProfile from "./EditProfile";
+import EditCompanyServices from "./EditCompanyServices";
+function EditCompany(props) {
   const {
     activeButton,
     setActiveButton,
@@ -23,6 +12,9 @@ function AddCompany(props) {
     setFile,
     defaultService,
     setServices,
+    setIsEditCompany,
+    setCompanyToEdit,
+    companyToEdit,
   } = useAdminContext();
 
   const activeButtonProps = {
@@ -44,10 +36,10 @@ function AddCompany(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         onHide={() => {
-          setIsAddCompany(false);
+          setIsEditCompany(false);
+          setCompanyToEdit();
           setActiveButton("profile");
-          setFile(null);
-          setServices([defaultService]);
+          setServices();
         }}
       >
         <Modal.Header
@@ -56,7 +48,7 @@ function AddCompany(props) {
           style={{ borderBottom: "0px" }}
         >
           <Modal.Title id="add-company-modal-header-label">
-            Add Company
+            Edit Company
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="add-company-modal-body ">
@@ -78,21 +70,13 @@ function AddCompany(props) {
             >
               Services
             </button>
-            {/* <button
-              onClick={() => onClickActiveButton("payment")}
-              className="button-group-add-modal"
-              style={activeButton === "payment" ? activeButtonProps : null}
-            >
-              Payment
-            </button> */}
           </div>
-          {activeButton === "profile" && <Profile />}
-          {activeButton === "services" && <Services />}
-          {activeButton === "payment" && <div />}
+          {activeButton === "profile" && <EditProfile />}
+          {activeButton === "services" && <EditCompanyServices />}
         </Modal.Body>
       </Modal>
     </>
   );
 }
 
-export default AddCompany;
+export default EditCompany;
