@@ -2,17 +2,19 @@
   "name": "booking-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://dragoshuniq.github.io/bookingApp",
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.15.6",
     "bootstrap": "^4.6.0",
     "dayjs": "^1.10.4",
     "firebase": "^8.6.1",
     "formik": "^2.2.6",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
@@ -31,7 +33,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -b main -d build"
   },
   "eslintConfig": {
     "extends": [

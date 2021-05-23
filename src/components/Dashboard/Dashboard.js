@@ -145,6 +145,8 @@ function Dashboard(props) {
         <DeleteCompany
           show={isDeleteConfirmShow.show}
           onHide={() => setIsDeleteConfirmShow({ show: false, id: "" })}
+          animation={false}
+
         />
         <ViewCompany
           show={isViewCompanyShow.show}

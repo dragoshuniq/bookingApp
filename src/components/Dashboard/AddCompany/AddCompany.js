@@ -1,12 +1,7 @@
 import React, { useState, useRef } from "react";
 import {
   Modal,
-  Button,
-  Row,
-  Col,
-  Form,
-  FormFile,
-  InputGroup,
+
 } from "react-bootstrap";
 import { useAdminContext } from "../../context/AdminContext";
 import Profile from "./Profile";

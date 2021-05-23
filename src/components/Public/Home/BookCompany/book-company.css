@@ -1,0 +1,57 @@
+.booking-company-title {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 42px;
+  letter-spacing: 0.001em;
+  color: #333333;
+}
+
+.booking-company-subtitle {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.001em;
+  text-transform: uppercase;
+  color: #828282;
+}
+
+.booking-company-service-title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  color: #333333;
+}
+
+.date-time-picker {
+  width: 117px;
+  height: 31px;
+  border: 1px solid #828282;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.ant-picker-now-btn {
+  display: none;
+}
+
+.closed-circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #eb5757;
+  display: inline-block;
+}
+
+.full-booked-circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: #2d9cdb;
+  display: inline-block;
+}

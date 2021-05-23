@@ -57,8 +57,7 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 26px;
+  font-size: 15px;
   color: #4f4f4f;
 }
 
@@ -68,3 +67,12 @@
   width: 80%;
 }
 
+.home-card-description {
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: 0.001em;
+  color: #828282;
+  min-height: 140px;
+}

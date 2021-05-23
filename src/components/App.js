@@ -8,16 +8,20 @@ import Home from "./Public/Home/Home";
 
 import Dashboard from "./Dashboard/Dashboard";
 import AdminPanel from "./AdminPanel/AdminPanel";
-import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PrivateRoute, SignPrivateRoute } from "./helpers/PrivateRoute";
 import { AdminProvider } from "./context/AdminContext";
+import { PublicProvider } from "./context/PublicContext";
+import { AuthProvider } from "./context/AuthContext";
+
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Switch>
-          <SignPrivateRoute path="/home" component={Home} />
+          <PublicProvider>
+            <SignPrivateRoute path="/home" component={Home} />
+          </PublicProvider>
           <SignPrivateRoute path="/signup" component={SignUp} />
           <SignPrivateRoute path="/signin" component={SignIn} />
           <SignPrivateRoute

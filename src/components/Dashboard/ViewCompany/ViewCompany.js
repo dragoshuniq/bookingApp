@@ -8,15 +8,6 @@ import firebase from "firebase";
 import "./view-company.css";
 function ViewCompany(props) {
   const { isViewCompanyShow, setIsViewCompanyShow } = useAdminContext();
-  const serviceTest = [
-    {
-      label: "Trimming",
-      time: "08.00 19.00",
-      priceMin: 10,
-      priceMax: 80,
-      days: "Sun, Mon, Tue, Wed, Thu, Fri",
-    },
-  ];
 
   const renderServices =
     isViewCompanyShow.show &&
