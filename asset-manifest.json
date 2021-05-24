@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.814dd96c.chunk.css",
+    "main.js": "/static/js/main.1ac27c97.chunk.js",
+    "main.js.map": "/static/js/main.1ac27c97.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5e363559.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5e363559.js.map",
+    "static/css/2.d373d0fa.chunk.css": "/static/css/2.d373d0fa.chunk.css",
+    "static/js/2.d9e8231d.chunk.js": "/static/js/2.d9e8231d.chunk.js",
+    "static/js/2.d9e8231d.chunk.js.map": "/static/js/2.d9e8231d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.d373d0fa.chunk.css.map": "/static/css/2.d373d0fa.chunk.css.map",
+    "static/css/main.814dd96c.chunk.css.map": "/static/css/main.814dd96c.chunk.css.map",
+    "static/js/2.d9e8231d.chunk.js.LICENSE.txt": "/static/js/2.d9e8231d.chunk.js.LICENSE.txt",
+    "static/media/bookingIcon.39ffe2d4.svg": "/static/media/bookingIcon.39ffe2d4.svg",
+    "static/media/bookingLogo.e7826591.svg": "/static/media/bookingLogo.e7826591.svg",
+    "static/media/confirmed.77aca557.svg": "/static/media/confirmed.77aca557.svg",
+    "static/media/dashboardIcon.482e3117.svg": "/static/media/dashboardIcon.482e3117.svg",
+    "static/media/deleteTrash.3051de29.svg": "/static/media/deleteTrash.3051de29.svg",
+    "static/media/elipse1.68e789a0.svg": "/static/media/elipse1.68e789a0.svg",
+    "static/media/elipse2.e8bf02b3.svg": "/static/media/elipse2.e8bf02b3.svg",
+    "static/media/elipse3.8576989a.svg": "/static/media/elipse3.8576989a.svg",
+    "static/media/elipse4.1d559143.svg": "/static/media/elipse4.1d559143.svg",
+    "static/media/flightBooking.d9f1591f.svg": "/static/media/flightBooking.d9f1591f.svg",
+    "static/media/google.bbce75f8.svg": "/static/media/google.bbce75f8.svg",
+    "static/media/resetPassword.750bcb41.svg": "/static/media/resetPassword.750bcb41.svg",
+    "static/media/serviceIcon.8380c8e8.svg": "/static/media/serviceIcon.8380c8e8.svg",
+    "static/media/signIn.7b7794ee.svg": "/static/media/signIn.7b7794ee.svg",
+    "static/media/signUp.7e56e2e9.svg": "/static/media/signUp.7e56e2e9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5e363559.js",
+    "static/css/2.d373d0fa.chunk.css",
+    "static/js/2.d9e8231d.chunk.js",
+    "static/css/main.814dd96c.chunk.css",
+    "static/js/main.1ac27c97.chunk.js"
+  ]
+}
