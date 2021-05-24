@@ -232,6 +232,7 @@ function BookCompany(props) {
                 companyID: currentBookCompany.id,
                 companyName: currentBookCompany.companyName,
                 isConfirmed: false,
+                serviceName: selectedService.name,
               });
               setIsUserInfoShow(true);
               setIsBookingCompany(false);

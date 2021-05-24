@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { usePublicContext } from "../../../context/PublicContext";
 import firebase from "firebase";
-
+import axios from "axios";
 function UserInfo(props) {
   const {
     setCurrentUserData,
@@ -11,6 +11,7 @@ function UserInfo(props) {
     bookService,
   } = usePublicContext();
   const [validatedForm, setValidatedForm] = useState(false);
+  const [loading, setLoading] = useState(false);
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -38,20 +39,41 @@ function UserInfo(props) {
       phone: phoneRef.current.value,
       email: emailRef.current.value,
     };
+
     setCurrentUserData(bookPerson);
     firebase
       .firestore()
       .collection("bookings")
       .add({ ...bookService, bookPerson })
       .then(() => {
-        setIsUserInfoShow(false);
-        setIsConfirmBookShow(true);
-        sendEmail();
+        setLoading(true);
+        sendEmail(bookPerson);
       });
   };
-  function sendEmail() {
-   
-
+  function sendEmail(bookPerson) {
+    try {
+      axios
+        .post("http://localhost:5124/sendmail", {
+          bookPerson,
+          companyName: bookService.companyName,
+          time: bookService.time,
+          date: bookService.date,
+          price: bookService.price,
+          duration: bookService.duration,
+          serviceName: bookService.serviceName,
+        })
+        .then(
+          (response) => {
+            console.log(response);
+            setIsUserInfoShow(false);
+            setIsConfirmBookShow(true);
+            setLoading(false);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    } catch (error) {}
   }
   return (
     <>
@@ -132,6 +154,7 @@ function UserInfo(props) {
             <Button
               type="submit"
               className="add-company-submit-button mb-5 mt-4"
+              disabled={loading}
             >
               Save profile
             </Button>

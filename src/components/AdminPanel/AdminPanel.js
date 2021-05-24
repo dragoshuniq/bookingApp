@@ -24,10 +24,10 @@ function AdminPanel({ children }) {
         </Navbar.Brand>
         {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
         <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-        <div className="mr-5" id="admin-info-container">
+        <div className="mr-5" id="admin-info-container" style={{ width: 400 }}>
           <Image
             src={
-              userData
+              userData && userData.hasOwnProperty("photo")
                 ? userData.photo
                 : "https://filmfare.wwmindia.com/content/2018/feb/1_1519025892.jpg"
             }
@@ -35,8 +35,8 @@ function AdminPanel({ children }) {
             id="user-image"
           />
           <div>
-            <small id="admin-name-text">
-              {userData ? userData.displayName : "Joe Doel"}
+            <small className="admin-name-text d-block">
+              {userData ? userData.displayName.slice(0, 25) : "Joe Doel"}
             </small>
             <small id="admin-status-text">Admin</small>
           </div>
@@ -55,7 +55,7 @@ function AdminPanel({ children }) {
         id="admin-container"
         className="remove-all-margin remove-all-padding"
       >
-        <Row style={{height:"100vh"}}>
+        <Row style={{ height: "100vh" }}>
           {/* admin */}
           <Col xs={2} sm={2} md={2} lg={2} xl={2}>
             <Sidebar />

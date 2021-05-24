@@ -35,7 +35,10 @@ export default function SignUp() {
     } else {
       try {
         setIsLoadingForm(true);
-        signUp(emailRef.current.value, passwordRef.current.value);
+        signUp(emailRef.current.value, passwordRef.current.value, {
+          displayName:
+            firstNameRef.current.value + " " + lastNameRef.current.value,
+        });
       } catch (error) {}
     }
 

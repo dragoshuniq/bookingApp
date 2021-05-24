@@ -67,6 +67,7 @@ export function AdminProvider({ children }) {
   const [companies, setCompanies] = useState([]);
   const [isEditCompany, setIsEditCompany] = useState(false);
   const [companyToEdit, setCompanyToEdit] = useState(false);
+  const [allServices, setAllServices] = useState([]);
 
   const [currentTimeTable, setCurrentTimeTable] = useState(
     defaultService.availability
@@ -103,6 +104,7 @@ export function AdminProvider({ children }) {
           companies.push(comp);
         });
         setCompanies(companies);
+        getAllServices(companies)
       });
   };
 
@@ -119,6 +121,16 @@ export function AdminProvider({ children }) {
       .catch((error) => {
         // console.error("Error removing document: ", error);
       });
+  };
+
+  const getAllServices = (companies) => {
+    var allServices = [];
+    companies.map((comp) => {
+      return comp.services.map((serv) => {
+        allServices.push(serv.name);
+      });
+    });
+    setAllServices(allServices);
   };
 
   const value = {
@@ -140,6 +152,7 @@ export function AdminProvider({ children }) {
     isEditCompany,
     companyToEdit,
     isEditServiceShow,
+    allServices,
     setIsAddCompany,
     setIsEditTime,
     setIsSelectTime,
@@ -159,6 +172,7 @@ export function AdminProvider({ children }) {
     setIsEditCompany,
     setCompanyToEdit,
     setIsEditServiceShow,
+    setAllServices,
   };
   return (
     <CompanyContext.Provider value={value}>{children}</CompanyContext.Provider>

@@ -50,9 +50,12 @@ export function AuthProvider({ children }) {
     setError({ message: "", type: "" });
   };
 
-  async function signUp(email, password) {
+  async function signUp(email, password, data) {
     return auth
       .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        setUserDB(firebase.auth().currentUser.uid, data);
+      })
       .catch((err) => displayError(err.message, "signup"));
   }
   async function signIn(email, password) {
