@@ -26,7 +26,6 @@ app.post("/sendmail", (req, res) => {
 });
 let userMail = process.env.USER;
 let userPass = process.env.PASS;
-console.log(userPass)
 
 async function sendMail(data, callback) {
   let testAccount = await nodemailer.createTestAccount();
