@@ -1,0 +1,27 @@
+{
+  "name": "emailsender",
+  "version": "1.0.0",
+  "description": "emai sender booking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dragoshuniq/bookingApp.git"
+  },
+  "author": "Dragosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dragoshuniq/bookingApp/issues"
+  },
+  "homepage": "https://github.com/dragoshuniq/bookingApp#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.4",
+    "express": "^4.17.1",
+    "nodemailer": "^6.6.1",
+    "nodemon": "^2.0.7"
+  }
+}
