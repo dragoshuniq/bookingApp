@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -23,6 +24,9 @@ app.post("/sendmail", (req, res) => {
     res.send(info);
   });
 });
+let userMail = process.env.USER;
+let userPass = process.env.PASS;
+console.log(userPass)
 
 async function sendMail(data, callback) {
   let testAccount = await nodemailer.createTestAccount();
@@ -31,8 +35,8 @@ async function sendMail(data, callback) {
     port: 465,
     secure: true, // use SSL
     auth: {
-      user: "dragoshuniq@gmail.com",
-      pass: "fcrealprouniq1998",
+      user: userMail,
+      pass: userPass,
     },
   });
 
